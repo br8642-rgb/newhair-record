@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>뉴헤어 진료기록부 생성기</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #c0392b;
+    --subtle: #f5f5f5;
+    --border: #d0d0d0;
+    --section-bg: #eeeeee;
+    --text: #1a1a1a;
+    --muted: #666;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    background: #f0f2f5;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── APP HEADER ── */
+  .app-header {
+    background: var(--primary);
+    color: #fff;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .app-header .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #fff; letter-spacing: -1px;
+  }
+  .app-header h1 { font-size: 17px; font-weight: 700; letter-spacing: 0.5px; }
+  .app-header p { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 440px 1fr;
+    gap: 24px;
+    padding: 24px 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ── PANEL ── */
+  .panel {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .panel-title {
+    background: var(--primary);
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .panel-title .badge {
+    background: var(--accent);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .panel-body { padding: 20px; }
+
+  /* ── FORM ── */
+  .form-section { margin-bottom: 20px; }
+  .form-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  textarea.soap-input {
+    width: 100%;
+    height: 220px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    resize: vertical;
+    line-height: 1.6;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+  textarea.soap-input:focus { outline: none; border-color: var(--accent); }
+  textarea.soap-input::placeholder { color: #bbb; font-size: 12px; }
+
+  .parse-btn {
+    margin-top: 8px;
+    width: 100%;
+    padding: 10px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .parse-btn:hover { background: #2d2d50; }
+  .parse-btn:active { transform: scale(0.98); }
+
+  .parse-status {
+    font-size: 12px;
+    margin-top: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: none;
+  }
+  .parse-status.success { background: #e8f5e9; color: #2e7d32; display: block; }
+  .parse-status.error   { background: #fdecea; color: #c62828; display: block; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 11px; font-weight: 600; color: var(--muted); }
+  .field input {
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .field input:focus { outline: none; border-color: var(--accent); }
+  .field input.auto-filled { background: #fff9f9; border-color: #f5a0a0; }
+
+  .download-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .download-btn:hover { background: #a93226; }
+  .download-btn:active { transform: scale(0.98); }
+  .download-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+  .reset-btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: var(--muted);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.2s;
+  }
+  .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── PREVIEW PANEL ── */
+  .preview-wrap {
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
+    padding: 20px;
+    background: #e8eaed;
+    border-radius: 0 0 12px 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  /* ── RECORD DOCUMENT ── */
+  #record-doc {
+    width: 794px;  /* A4 at 96dpi */
+    min-height: 1123px;
+    background: #fff;
+    padding: 36px 40px 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 13px;
+    color: #111;
+    line-height: 1.6;
+    transform-origin: top center;
+  }
+
+  /* Record: Header */
+  .rec-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2.5px solid #111;
+  }
+  .rec-logo {
+    height: 48px;
+    object-fit: contain;
+  }
+  .rec-title {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 12px;
+    color: #111;
+    margin-right: -12px;
+  }
+
+  /* Record: Patient Info */
+  .rec-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+  }
+  .rec-info-table td {
+    border: 1px solid #999;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  .rec-info-table .info-label {
+    background: #f0f0f0;
+    font-weight: 700;
+    width: 80px;
+    color: #333;
+    white-space: nowrap;
+  }
+  .rec-info-table .info-value {
+    width: 160px;
+    color: #111;
+  }
+
+  /* Record: SOAP */
+  .rec-section {
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+  }
+  .rec-section-header {
+    background: #e8e8e8;
+    padding: 5px 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    border-bottom: 1px solid #aaa;
+  }
+  .rec-section-header .soap-letter {
+    font-size: 16px;
+    font-weight: 900;
+    color: #c0392b;
+    min-width: 16px;
+  }
+  .rec-section-header .soap-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #444;
+  }
+  .rec-section-body {
+    padding: 8px 14px;
+    min-height: 40px;
+    background: #fff;
+    white-space: pre-wrap;
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  /* P section subsections */
+  .rec-p-subsection { margin-bottom: 6px; }
+  .rec-p-sub-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 2px;
+  }
+  .rec-p-items { padding-left: 4px; }
+  .rec-p-item {
+    font-size: 13px;
+    line-height: 1.7;
+    display: flex;
+    gap: 4px;
+  }
+  .rec-p-item::before { content: '·'; color: #c0392b; font-weight: 900; flex-shrink: 0; }
+
+  /* Generic bullet items (S/O/A) */
+  .rec-bullet-item {
+    font-size: 13px;
+    line-height: 1.7;
+    display: flex;
+    gap: 4px;
+  }
+  .rec-bullet-item::before { content: '·'; color: #c0392b; font-weight: 900; flex-shrink: 0; }
+
+  /* Record: Footer */
+  .rec-footer {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1.5px solid #111;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── LOGO PLACEHOLDER ── */
+  .rec-logo-placeholder {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 900;
+    color: #111;
+    letter-spacing: -0.5px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 1fr; }
+    .preview-wrap { justify-content: center; }
+    #record-doc { transform: scale(0.65); transform-origin: top center; margin-bottom: -380px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- APP HEADER -->
+<div class="app-header">
+  <div class="logo-mark">N</div>
+  <div>
+    <h1>뉴헤어 진료기록부 생성기</h1>
+    <p>SOAP 텍스트 붙여넣기 → 자동 파싱 → PNG 다운로드</p>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- LEFT: INPUT PANEL -->
+  <div>
+    <!-- SOAP Input -->
+    <div class="panel" style="margin-bottom:16px">
+      <div class="panel-title">
+        <span>📋 SOAP 텍스트 입력</span>
+        <span class="badge">자동 파싱</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-section">
+          <div class="form-section-label">Claude 요약본 붙여넣기</div>
+          <textarea class="soap-input" id="soapInput" placeholder="예시:
+환자명: 홍길동
+진료일자: 2026-06-04
+주치의: 김진오
+
+S (주관적 정보)
+· 두정부 탈모 진행으로 내원
+· M자 탈모 심화 호소
+
+O (객관적 소견)
+· Norwood stage IV 확인
+
+A (평가)
+· 안드로겐성 탈모증 (AGA)
+
+P (치료 계획)
+[약물치료]
+· 피나스테리드 1mg 처방
+[수술계획]
+· 모발이식 2,500모 계획"></textarea>
+          <button class="parse-btn" onclick="parseSoap()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            자동 파싱 및 미리보기 생성
+          </button>
+          <div class="parse-status" id="parseStatus"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manual Fields -->
+    <div class="panel" style="margin-bottom:16px">
+      <div class="panel-title">
+        <span>✏️ 직접 입력 항목</span>
+        <span class="badge">필수</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-section">
+          <div class="form-section-label">자동 파싱 결과 (수정 가능)</div>
+          <div class="grid-3" style="margin-bottom:10px">
+            <div class="field">
+              <label>환자명</label>
+              <input type="text" id="f_name" placeholder="홍길동" oninput="updatePreview()">
+            </div>
+            <div class="field">
+              <label>진료일자</label>
+              <input type="text" id="f_date" placeholder="2026-06-04" oninput="updatePreview()">
+            </div>
+            <div class="field">
+              <label>주치의</label>
+              <input type="text" id="f_doctor" placeholder="김진오" oninput="updatePreview()">
+            </div>
+          </div>
+        </div>
+        <div class="form-section" style="margin-bottom:0">
+          <div class="form-section-label">직접 입력 항목</div>
+          <div class="grid-3">
+            <div class="field">
+              <label>생년월일</label>
+              <input type="text" id="f_birth" placeholder="1990-01-01" oninput="updatePreview()">
+            </div>
+            <div class="field">
+              <label>고객번호</label>
+              <input type="text" id="f_custno" placeholder="NH00001" oninput="updatePreview()">
+            </div>
+            <div class="field">
+              <label>전화번호</label>
+              <input type="text" id="f_phone" placeholder="010-0000-0000" oninput="updatePreview()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action -->
+    <div class="panel">
+      <div class="panel-body">
+        <button class="download-btn" id="downloadBtn" onclick="downloadPng()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          PNG 다운로드
+        </button>
+        <button class="reset-btn" onclick="resetAll()">초기화</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: PREVIEW PANEL -->
+  <div class="panel">
+    <div class="panel-title">
+      <span>👁 미리보기</span>
+      <span class="badge" id="previewBadge">대기 중</span>
+    </div>
+    <div class="preview-wrap">
+      <div id="record-doc">
+        <!-- HEADER -->
+        <div class="rec-header">
+          <div class="rec-logo-placeholder" id="recLogoArea">
+            <span style="font-size:22px;font-weight:900;color:#111;letter-spacing:-1px">NEW<span style="color:#c0392b">HAIR</span></span>
+          </div>
+          <div class="rec-title">진 료 기 록 부</div>
+        </div>
+
+        <!-- PATIENT INFO -->
+        <table class="rec-info-table">
+          <tr>
+            <td class="info-label">환자명</td>
+            <td class="info-value" id="r_name">—</td>
+            <td class="info-label">생년월일</td>
+            <td class="info-value" id="r_birth">—</td>
+            <td class="info-label">고객번호</td>
+            <td class="info-value" id="r_custno">—</td>
+          </tr>
+          <tr>
+            <td class="info-label">진료일자</td>
+            <td class="info-value" id="r_date">—</td>
+            <td class="info-label">주치의</td>
+            <td class="info-value" id="r_doctor">—</td>
+            <td class="info-label">전화번호</td>
+            <td class="info-value" id="r_phone">—</td>
+          </tr>
+        </table>
+
+        <!-- SOAP SECTIONS -->
+        <div id="r_S_section" class="rec-section">
+          <div class="rec-section-header">
+            <span class="soap-letter">S</span>
+            <span class="soap-label">Subjective — 주관적 정보 (환자 호소)</span>
+          </div>
+          <div class="rec-section-body" id="r_S">입력 대기 중...</div>
+        </div>
+
+        <div id="r_O_section" class="rec-section">
+          <div class="rec-section-header">
+            <span class="soap-letter">O</span>
+            <span class="soap-label">Objective — 객관적 소견 (검사/진찰)</span>
+          </div>
+          <div class="rec-section-body" id="r_O">입력 대기 중...</div>
+        </div>
+
+        <div id="r_A_section" class="rec-section">
+          <div class="rec-section-header">
+            <span class="soap-letter">A</span>
+            <span class="soap-label">Assessment — 평가 및 진단</span>
+          </div>
+          <div class="rec-section-body" id="r_A">입력 대기 중...</div>
+        </div>
+
+        <div id="r_P_section" class="rec-section">
+          <div class="rec-section-header">
+            <span class="soap-letter">P</span>
+            <span class="soap-label">Plan — 치료 계획</span>
+          </div>
+          <div class="rec-section-body" id="r_P">입력 대기 중...</div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="rec-footer">뉴헤어모발성형외과의원</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── LOGO (hidden img for canvas) ── -->
+<img id="logoImgHidden" src="logo.png" style="display:none" crossorigin="anonymous"
+  onerror="this.style.display='none'" onload="logoLoaded=true">
+
+<script>
+let logoLoaded = false;
+let parsedData = { S:'', O:'', A:'', P:'' };
+
+/* ── PARSE SOAP ── */
+function parseSoap() {
+  const raw = document.getElementById('soapInput').value.trim();
+  if (!raw) {
+    showStatus('텍스트를 입력해 주세요.', 'error');
+    return;
+  }
+
+  // Extract meta fields
+  const nameMatch   = raw.match(/환자명\s*[:：]\s*(.+)/);
+  const dateMatch   = raw.match(/진료일자\s*[:：]\s*(.+)/);
+  const doctorMatch = raw.match(/주치의\s*[:：]\s*(.+)/);
+
+  if (nameMatch)   setAutoFilled('f_name',   nameMatch[1].trim());
+  if (dateMatch)   setAutoFilled('f_date',   dateMatch[1].trim());
+  if (doctorMatch) setAutoFilled('f_doctor', doctorMatch[1].trim());
+
+  // Extract SOAP sections
+  const sections = { S:'', O:'', A:'', P:'' };
+
+  // Patterns: S / O / A / P with various header styles
+  const soapPattern = /(?:^|\n)\s*([SOAP])\s*[\(（]?[^)\n]*[\)）]?\s*\n([\s\S]*?)(?=\n\s*[SOAP]\s*[\(（]|\n\s*[SOAP]\s*[\-—\s]|$)/gi;
+  const altPattern  = /(?:^|\n)(?:S|O|A|P)\s*[\(\[（【]\s*[^)\]）】\n]*[\)\]）】]\s*\n([\s\S]*?)(?=\n\s*[SOAP]\s*[\(\[（【]|$)/gi;
+
+  // Try line-by-line approach (more robust)
+  const lines = raw.split('\n');
+  let currentSection = null;
+  let sectionLines = { S:[], O:[], A:[], P:[] };
+
+  for (let line of lines) {
+    const sHeader = line.match(/^\s*S\b[\s\(（【\[]*(주관적|Subjective)?/i);
+    const oHeader = line.match(/^\s*O\b[\s\(（【\[]*(객관적|Objective)?/i);
+    const aHeader = line.match(/^\s*A\b[\s\(（【\[]*(평가|Assessment)?/i);
+    const pHeader = line.match(/^\s*P\b[\s\(（【\[]*(치료|Plan)?/i);
+
+    if (sHeader && !line.match(/·|•|^\s*[-*]/)) { currentSection = 'S'; continue; }
+    if (oHeader && !line.match(/·|•|^\s*[-*]/)) { currentSection = 'O'; continue; }
+    if (aHeader && !line.match(/·|•|^\s*[-*]/)) { currentSection = 'A'; continue; }
+    if (pHeader && !line.match(/·|•|^\s*[-*]/)) { currentSection = 'P'; continue; }
+
+    if (currentSection) {
+      sectionLines[currentSection].push(line);
+    }
+  }
+
+  parsedData.S = sectionLines.S.join('\n').trim();
+  parsedData.O = sectionLines.O.join('\n').trim();
+  parsedData.A = sectionLines.A.join('\n').trim();
+  parsedData.P = sectionLines.P.join('\n').trim();
+
+  const foundSections = [parsedData.S, parsedData.O, parsedData.A, parsedData.P].filter(s => s).length;
+
+  if (foundSections === 0) {
+    showStatus('SOAP 섹션을 찾지 못했습니다. S/O/A/P 구분이 있는지 확인해 주세요.', 'error');
+    return;
+  }
+
+  updatePreview();
+  showStatus(`✓ 파싱 완료 — S/O/A/P ${foundSections}개 섹션 인식됨`, 'success');
+  document.getElementById('previewBadge').textContent = '업데이트됨';
+}
+
+function setAutoFilled(id, val) {
+  const el = document.getElementById(id);
+  if (!el.value) {
+    el.value = val;
+    el.classList.add('auto-filled');
+  }
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('parseStatus');
+  el.textContent = msg;
+  el.className = 'parse-status ' + type;
+}
+
+/* ── RENDER SOAP CONTENT ── */
+function renderSoapBody(elId, text, isP = false) {
+  const el = document.getElementById(elId);
+  if (!text.trim()) { el.innerHTML = '<span style="color:#bbb;font-size:12px">내용 없음</span>'; return; }
+
+  if (!isP) {
+    // S, O, A: bullet items
+    const lines = text.split('\n').filter(l => l.trim());
+    el.innerHTML = lines.map(line => {
+      const content = line.replace(/^[\s·•\-\*]+/, '').trim();
+      if (!content) return '';
+      return `<div class="rec-bullet-item">${escHtml(content)}</div>`;
+    }).filter(Boolean).join('');
+  } else {
+    // P: subsections with [소제목]
+    const lines = text.split('\n');
+    let html = '';
+    let currentSub = null;
+    let currentItems = [];
+
+    const flush = () => {
+      if (currentSub !== null || currentItems.length > 0) {
+        if (currentSub) html += `<div class="rec-p-subsection"><div class="rec-p-sub-title">${escHtml(currentSub)}</div>`;
+        else html += `<div class="rec-p-subsection">`;
+        html += `<div class="rec-p-items">`;
+        html += currentItems.map(i => `<div class="rec-p-item">${escHtml(i)}</div>`).join('');
+        html += `</div></div>`;
+        currentSub = null; currentItems = [];
+      }
+    };
+
+    for (let line of lines) {
+      const subMatch = line.match(/^\s*[\[【\(（](.+?)[\]】\)）]/);
+      if (subMatch) {
+        flush();
+        currentSub = subMatch[1].trim();
+      } else {
+        const content = line.replace(/^[\s·•\-\*]+/, '').trim();
+        if (content) currentItems.push(content);
+      }
+    }
+    flush();
+    el.innerHTML = html || '<span style="color:#bbb;font-size:12px">내용 없음</span>';
+  }
+}
+
+/* ── UPDATE PREVIEW ── */
+function updatePreview() {
+  // Info table
+  setRec('r_name',   'f_name');
+  setRec('r_birth',  'f_birth');
+  setRec('r_custno', 'f_custno');
+  setRec('r_date',   'f_date');
+  setRec('r_doctor', 'f_doctor');
+  setRec('r_phone',  'f_phone');
+
+  // SOAP
+  renderSoapBody('r_S', parsedData.S);
+  renderSoapBody('r_O', parsedData.O);
+  renderSoapBody('r_A', parsedData.A);
+  renderSoapBody('r_P', parsedData.P, true);
+}
+
+function setRec(recId, fieldId) {
+  const val = document.getElementById(fieldId).value.trim();
+  document.getElementById(recId).textContent = val || '—';
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ── DOWNLOAD PNG ── */
+async function downloadPng() {
+  const btn = document.getElementById('downloadBtn');
+  btn.disabled = true;
+  btn.innerHTML = `<span>생성 중...</span>`;
+
+  try {
+    const doc = document.getElementById('record-doc');
+    const originalTransform = doc.style.transform;
+    doc.style.transform = 'none';
+
+    const canvas = await html2canvas(doc, {
+      scale: 2.5,
+      useCORS: true,
+      allowTaint: false,
+      backgroundColor: '#ffffff',
+      logging: false,
+      width: doc.scrollWidth,
+      height: doc.scrollHeight,
+    });
+
+    doc.style.transform = originalTransform;
+
+    // Filename: 환자명_진료기록부_YYMMDD.png
+    const name    = document.getElementById('f_name').value.trim() || '환자';
+    const dateVal = document.getElementById('f_date').value.trim() || '';
+    const dateStr = dateVal.replace(/[-./]/g, '').slice(2, 8) || formatToday();
+    const filename = `${name}_진료기록부_${dateStr}.png`;
+
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+
+    showStatus(`✓ 다운로드 완료: ${filename}`, 'success');
+  } catch(e) {
+    showStatus('PNG 생성 오류: ' + e.message, 'error');
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> PNG 다운로드`;
+  }
+}
+
+function formatToday() {
+  const d = new Date();
+  return String(d.getFullYear()).slice(2)
+       + String(d.getMonth()+1).padStart(2,'0')
+       + String(d.getDate()).padStart(2,'0');
+}
+
+/* ── RESET ── */
+function resetAll() {
+  if (!confirm('모두 초기화하시겠습니까?')) return;
+  document.getElementById('soapInput').value = '';
+  ['f_name','f_birth','f_custno','f_date','f_doctor','f_phone'].forEach(id => {
+    const el = document.getElementById(id);
+    el.value = '';
+    el.classList.remove('auto-filled');
+  });
+  parsedData = { S:'', O:'', A:'', P:'' };
+  updatePreview();
+  document.getElementById('parseStatus').className = 'parse-status';
+  document.getElementById('previewBadge').textContent = '대기 중';
+}
+
+/* ── LOGO HANDLING ── */
+// Try to load logo.png; if it loads, replace text placeholder
+document.getElementById('logoImgHidden').addEventListener('load', function() {
+  const area = document.getElementById('recLogoArea');
+  const img = document.createElement('img');
+  img.src = 'logo.png';
+  img.className = 'rec-logo';
+  img.crossOrigin = 'anonymous';
+  area.innerHTML = '';
+  area.appendChild(img);
+  logoLoaded = true;
+});
+
+// Initial render
+updatePreview();
+</script>
+</body>
+</html>
