@@ -9,22 +9,17 @@
   :root {
     --primary: #1a1a2e;
     --accent: #c0392b;
-    --subtle: #f5f5f5;
     --border: #d0d0d0;
-    --section-bg: #eeeeee;
     --text: #1a1a1a;
     --muted: #666;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
     background: #f0f2f5;
     color: var(--text);
     min-height: 100vh;
   }
-
   .app-header {
     background: var(--primary);
     color: #fff;
@@ -43,7 +38,6 @@
   }
   .app-header h1 { font-size: 16px; font-weight: 700; letter-spacing: 0.5px; }
   .app-header p  { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
-
   .layout {
     display: grid;
     grid-template-columns: 420px 1fr;
@@ -52,7 +46,6 @@
     max-width: 1400px;
     margin: 0 auto;
   }
-
   .panel {
     background: #fff;
     border-radius: 10px;
@@ -65,7 +58,6 @@
     padding: 10px 18px;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.3px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -78,7 +70,6 @@
     font-weight: 600;
   }
   .panel-body { padding: 16px; }
-
   .form-section { margin-bottom: 14px; }
   .form-section:last-child { margin-bottom: 0; }
   .form-section-label {
@@ -91,7 +82,6 @@
     padding-bottom: 5px;
     border-bottom: 1px solid var(--border);
   }
-
   textarea.soap-input {
     width: 100%;
     height: 180px;
@@ -107,7 +97,6 @@
   }
   textarea.soap-input:focus { outline: none; border-color: var(--accent); }
   textarea.soap-input::placeholder { color: #bbb; font-size: 11.5px; }
-
   .parse-btn {
     margin-top: 7px;
     width: 100%;
@@ -123,7 +112,6 @@
     display: flex; align-items: center; justify-content: center; gap: 6px;
   }
   .parse-btn:hover { background: #2d2d50; }
-
   .parse-status {
     font-size: 11.5px;
     margin-top: 6px;
@@ -133,10 +121,7 @@
   }
   .parse-status.success { background: #e8f5e9; color: #2e7d32; display: block; }
   .parse-status.error   { background: #fdecea; color: #c62828; display: block; }
-
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-
   .field { display: flex; flex-direction: column; gap: 3px; }
   .field label { font-size: 10.5px; font-weight: 600; color: var(--muted); }
   .field input {
@@ -151,7 +136,6 @@
   }
   .field input:focus { outline: none; border-color: var(--accent); }
   .field input.auto-filled { background: #fff9f9; border-color: #f5a0a0; }
-
   .download-btn {
     width: 100%;
     padding: 12px;
@@ -163,12 +147,10 @@
     font-weight: 800;
     cursor: pointer;
     transition: background 0.2s;
-    letter-spacing: 0.3px;
     display: flex; align-items: center; justify-content: center; gap: 8px;
   }
   .download-btn:hover { background: #a93226; }
   .download-btn:disabled { background: #ccc; cursor: not-allowed; }
-
   .reset-btn {
     width: 100%;
     padding: 9px;
@@ -183,7 +165,6 @@
     transition: all 0.2s;
   }
   .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
-
   .preview-wrap {
     overflow-y: auto;
     max-height: calc(100vh - 110px);
@@ -195,7 +176,7 @@
     justify-content: center;
   }
 
-  /* ── RECORD DOCUMENT ── */
+  /* ── RECORD DOC ── */
   #record-doc {
     width: 794px;
     background: #fff;
@@ -206,7 +187,6 @@
     color: #111;
     line-height: 1.6;
   }
-
   .rec-header {
     display: flex;
     align-items: center;
@@ -231,8 +211,6 @@
     font-weight: 900;
     color: #111;
   }
-
-  /* Patient info table */
   .rec-info-table {
     width: 100%;
     border-collapse: collapse;
@@ -251,9 +229,6 @@
     width: 72px;
   }
   .rec-info-table .info-value { color: #111; }
-  .rec-info-table .info-value-wide { color: #111; }
-
-  /* SOAP sections */
   .rec-section {
     margin-bottom: 8px;
     border: 1px solid #aaa;
@@ -282,7 +257,6 @@
     min-height: 36px;
     background: #fff;
   }
-
   .rec-bullet-item {
     font-size: 12.5px;
     line-height: 1.75;
@@ -290,7 +264,6 @@
     gap: 5px;
   }
   .rec-bullet-item::before { content: '·'; color: #c0392b; font-weight: 900; flex-shrink: 0; }
-
   .rec-p-subsection { margin-bottom: 5px; }
   .rec-p-sub-title {
     font-weight: 700;
@@ -305,7 +278,6 @@
     gap: 5px;
   }
   .rec-p-item::before { content: '·'; color: #c0392b; font-weight: 900; flex-shrink: 0; }
-
   .rec-footer {
     margin-top: 16px;
     padding-top: 10px;
@@ -327,7 +299,6 @@
     text-align: center;
     line-height: 1.5;
   }
-
   @media (max-width: 1100px) {
     .layout { grid-template-columns: 1fr; }
     #record-doc { transform: scale(0.62); transform-origin: top center; margin-bottom: -420px; }
@@ -346,10 +317,8 @@
 
 <div class="layout">
 
-  <!-- LEFT PANEL -->
   <div style="display:flex;flex-direction:column;gap:14px;">
 
-    <!-- SOAP Input -->
     <div class="panel">
       <div class="panel-title">
         <span>📋 SOAP 텍스트 입력</span>
@@ -358,8 +327,7 @@
       <div class="panel-body">
         <div class="form-section" style="margin-bottom:0">
           <div class="form-section-label">Claude 요약본 붙여넣기</div>
-          <textarea class="soap-input" id="soapInput" placeholder="예시:
-환자명: 홍길동
+          <textarea class="soap-input" id="soapInput" placeholder="환자명: 홍길동
 진료일자: 2026-06-04
 주치의: 김진오
 
@@ -373,8 +341,8 @@ A (평가)
 · 안드로겐성 탈모증 (AGA)
 
 P (치료 계획)
-[약물치료]
-· 피나스테리드 1mg 처방"></textarea>
+[수술 계획]
+· 모발이식 1,800모 예정"></textarea>
           <button class="parse-btn" onclick="parseSoap()">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
             자동 파싱 및 미리보기 생성
@@ -384,15 +352,13 @@ P (치료 계획)
       </div>
     </div>
 
-    <!-- Manual Fields -->
     <div class="panel">
       <div class="panel-title">
         <span>✏️ 직접 입력 항목</span>
         <span class="badge">필수</span>
       </div>
-      <div class="panel-body" style="display:flex;flex-direction:column;gap:12px;">
+      <div class="panel-body" style="display:flex;flex-direction:column;gap:10px;">
 
-        <!-- Row 1: 자동파싱 -->
         <div class="form-section" style="margin-bottom:0">
           <div class="form-section-label">자동 파싱 결과 (수정 가능)</div>
           <div class="grid-3">
@@ -411,39 +377,31 @@ P (치료 계획)
           </div>
         </div>
 
-        <!-- Row 2: 직접입력 -->
         <div class="form-section" style="margin-bottom:0">
           <div class="form-section-label">직접 입력 항목</div>
           <div class="grid-3" style="margin-bottom:8px;">
             <div class="field">
-              <label>생년월일</label>
-              <input type="text" id="f_birth" placeholder="920617" oninput="updatePreview()">
-            </div>
-            <div class="field">
-              <label>주민등록번호</label>
-              <input type="text" id="f_jumin" placeholder="920617-1234567" oninput="updatePreview()">
-            </div>
-            <div class="field">
               <label>고객번호</label>
               <input type="text" id="f_custno" placeholder="20230509-013" oninput="updatePreview()">
             </div>
-          </div>
-          <div class="grid-2">
+            <div class="field">
+              <label>주민등록번호</label>
+              <input type="text" id="f_jumin" placeholder="751128-2069639" oninput="updatePreview()">
+            </div>
             <div class="field">
               <label>전화번호</label>
               <input type="text" id="f_phone" placeholder="010-0000-0000" oninput="updatePreview()">
             </div>
-            <div class="field">
-              <label>주소</label>
-              <input type="text" id="f_addr" placeholder="서울시 마포구" oninput="updatePreview()">
-            </div>
+          </div>
+          <div class="field">
+            <label>주소</label>
+            <input type="text" id="f_addr" placeholder="서울시 마포구" oninput="updatePreview()">
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Action -->
     <div class="panel">
       <div class="panel-body">
         <button class="download-btn" id="downloadBtn" onclick="downloadPng()">
@@ -456,7 +414,6 @@ P (치료 계획)
 
   </div>
 
-  <!-- RIGHT: PREVIEW -->
   <div class="panel">
     <div class="panel-title">
       <span>👁 미리보기</span>
@@ -465,7 +422,6 @@ P (치료 계획)
     <div class="preview-wrap">
       <div id="record-doc">
 
-        <!-- HEADER -->
         <div class="rec-header">
           <div id="recLogoArea" class="rec-logo-placeholder">
             <span style="font-size:20px;font-weight:900;letter-spacing:-1px">NEW<span style="color:#c0392b">HAIR</span></span>
@@ -473,33 +429,29 @@ P (치료 계획)
           <div class="rec-title">진 료 기 록 부</div>
         </div>
 
-        <!-- PATIENT INFO -->
         <table class="rec-info-table">
           <tr>
             <td class="info-label">환자명</td>
-            <td class="info-value" id="r_name">—</td>
-            <td class="info-label">생년월일</td>
-            <td class="info-value" id="r_birth">—</td>
-            <td class="info-label">고객번호</td>
-            <td class="info-value" id="r_custno">—</td>
+            <td class="info-value" id="r_name" style="width:220px;">—</td>
+            <td class="info-label">진료일자</td>
+            <td class="info-value" id="r_date" style="width:120px;">—</td>
+            <td class="info-label">주치의</td>
+            <td class="info-value" id="r_doctor">—</td>
           </tr>
           <tr>
+            <td class="info-label">고객번호</td>
+            <td class="info-value" id="r_custno">—</td>
             <td class="info-label">주민번호</td>
             <td class="info-value" id="r_jumin">—</td>
             <td class="info-label">전화번호</td>
             <td class="info-value" id="r_phone">—</td>
-            <td class="info-label">진료일자</td>
-            <td class="info-value" id="r_date">—</td>
           </tr>
           <tr>
             <td class="info-label">주소</td>
-            <td class="info-value-wide" id="r_addr" colspan="3">—</td>
-            <td class="info-label">주치의</td>
-            <td class="info-value" id="r_doctor">—</td>
+            <td class="info-value" id="r_addr" colspan="5">—</td>
           </tr>
         </table>
 
-        <!-- SOAP -->
         <div class="rec-section">
           <div class="rec-section-header">
             <span class="soap-letter">S</span>
@@ -532,7 +484,6 @@ P (치료 계획)
           <div class="rec-section-body" id="r_P"><span style="color:#bbb;font-size:12px">입력 대기 중...</span></div>
         </div>
 
-        <!-- FOOTER -->
         <div class="rec-footer">
           <div class="rec-footer-name">뉴헤어모발성형외과의원</div>
           <div class="rec-footer-note">※ 환자의 상세 인적사항(주소 등)은 CRM 시스템 내 마스터 회원 정보와 상시 연동되어 보관됨</div>
@@ -596,7 +547,7 @@ function parseSoap() {
   parsedData.P = sectionLines.P.join('\n').trim();
 
   const found = [parsedData.S, parsedData.O, parsedData.A, parsedData.P].filter(s=>s).length;
-  if (found === 0) { showStatus('SOAP 섹션을 찾지 못했습니다. S/O/A/P 구분이 있는지 확인해 주세요.', 'error'); return; }
+  if (found === 0) { showStatus('SOAP 섹션을 찾지 못했습니다.', 'error'); return; }
 
   updatePreview();
   showStatus(`✓ 파싱 완료 — ${found}개 섹션 인식됨`, 'success');
@@ -617,7 +568,6 @@ function showStatus(msg, type) {
 function renderSoap(elId, text, isP) {
   const el = document.getElementById(elId);
   if (!text.trim()) { el.innerHTML = '<span style="color:#bbb;font-size:12px">내용 없음</span>'; return; }
-
   if (!isP) {
     const lines = text.split('\n').filter(l => l.trim());
     el.innerHTML = lines.map(line => {
@@ -648,9 +598,9 @@ function renderSoap(elId, text, isP) {
 
 function updatePreview() {
   const fields = [
-    ['r_name','f_name'], ['r_birth','f_birth'], ['r_custno','f_custno'],
-    ['r_jumin','f_jumin'], ['r_phone','f_phone'], ['r_date','f_date'],
-    ['r_addr','f_addr'], ['r_doctor','f_doctor']
+    ['r_name','f_name'], ['r_date','f_date'], ['r_doctor','f_doctor'],
+    ['r_custno','f_custno'], ['r_jumin','f_jumin'], ['r_phone','f_phone'],
+    ['r_addr','f_addr']
   ];
   fields.forEach(([rid, fid]) => {
     const val = document.getElementById(fid).value.trim();
@@ -705,7 +655,7 @@ function formatToday() {
 function resetAll() {
   if (!confirm('모두 초기화하시겠습니까?')) return;
   document.getElementById('soapInput').value = '';
-  ['f_name','f_birth','f_custno','f_jumin','f_phone','f_date','f_addr','f_doctor'].forEach(id => {
+  ['f_name','f_date','f_doctor','f_custno','f_jumin','f_phone','f_addr'].forEach(id => {
     const el = document.getElementById(id);
     el.value = '';
     el.classList.remove('auto-filled');
