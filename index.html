@@ -25,50 +25,47 @@
     min-height: 100vh;
   }
 
-  /* ── APP HEADER ── */
   .app-header {
     background: var(--primary);
     color: #fff;
-    padding: 16px 32px;
+    padding: 14px 32px;
     display: flex;
     align-items: center;
     gap: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
   .app-header .logo-mark {
-    width: 36px; height: 36px;
+    width: 34px; height: 34px;
     background: var(--accent);
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 900; font-size: 18px; color: #fff; letter-spacing: -1px;
+    font-weight: 900; font-size: 17px; color: #fff;
   }
-  .app-header h1 { font-size: 17px; font-weight: 700; letter-spacing: 0.5px; }
-  .app-header p { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+  .app-header h1 { font-size: 16px; font-weight: 700; letter-spacing: 0.5px; }
+  .app-header p  { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
 
-  /* ── LAYOUT ── */
   .layout {
     display: grid;
-    grid-template-columns: 440px 1fr;
-    gap: 24px;
-    padding: 24px 32px;
+    grid-template-columns: 420px 1fr;
+    gap: 20px;
+    padding: 20px 28px;
     max-width: 1400px;
     margin: 0 auto;
   }
 
-  /* ── PANEL ── */
   .panel {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     overflow: hidden;
   }
   .panel-title {
     background: var(--primary);
     color: #fff;
-    padding: 12px 20px;
+    padding: 10px 18px;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -80,28 +77,28 @@
     font-size: 11px;
     font-weight: 600;
   }
-  .panel-body { padding: 20px; }
+  .panel-body { padding: 16px; }
 
-  /* ── FORM ── */
-  .form-section { margin-bottom: 20px; }
+  .form-section { margin-bottom: 14px; }
+  .form-section:last-child { margin-bottom: 0; }
   .form-section-label {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
     color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 8px;
-    padding-bottom: 6px;
+    letter-spacing: 0.7px;
+    margin-bottom: 7px;
+    padding-bottom: 5px;
     border-bottom: 1px solid var(--border);
   }
 
   textarea.soap-input {
     width: 100%;
-    height: 220px;
+    height: 180px;
     border: 1.5px solid var(--border);
     border-radius: 8px;
-    padding: 12px;
-    font-size: 13px;
+    padding: 10px 12px;
+    font-size: 12.5px;
     font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     resize: vertical;
     line-height: 1.6;
@@ -109,12 +106,12 @@
     transition: border-color 0.2s;
   }
   textarea.soap-input:focus { outline: none; border-color: var(--accent); }
-  textarea.soap-input::placeholder { color: #bbb; font-size: 12px; }
+  textarea.soap-input::placeholder { color: #bbb; font-size: 11.5px; }
 
   .parse-btn {
-    margin-top: 8px;
+    margin-top: 7px;
     width: 100%;
-    padding: 10px;
+    padding: 9px;
     background: var(--primary);
     color: #fff;
     border: none;
@@ -122,80 +119,77 @@
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    transition: background 0.2s;
     display: flex; align-items: center; justify-content: center; gap: 6px;
   }
   .parse-btn:hover { background: #2d2d50; }
-  .parse-btn:active { transform: scale(0.98); }
 
   .parse-status {
-    font-size: 12px;
+    font-size: 11.5px;
     margin-top: 6px;
-    padding: 6px 10px;
+    padding: 5px 10px;
     border-radius: 6px;
     display: none;
   }
   .parse-status.success { background: #e8f5e9; color: #2e7d32; display: block; }
   .parse-status.error   { background: #fdecea; color: #c62828; display: block; }
 
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-  .field { display: flex; flex-direction: column; gap: 4px; }
-  .field label { font-size: 11px; font-weight: 600; color: var(--muted); }
+  .field { display: flex; flex-direction: column; gap: 3px; }
+  .field label { font-size: 10.5px; font-weight: 600; color: var(--muted); }
   .field input {
     border: 1.5px solid var(--border);
     border-radius: 7px;
-    padding: 8px 10px;
-    font-size: 13px;
+    padding: 7px 9px;
+    font-size: 12.5px;
     font-family: inherit;
     color: var(--text);
     transition: border-color 0.2s;
+    width: 100%;
   }
   .field input:focus { outline: none; border-color: var(--accent); }
   .field input.auto-filled { background: #fff9f9; border-color: #f5a0a0; }
 
   .download-btn {
     width: 100%;
-    padding: 13px;
+    padding: 12px;
     background: var(--accent);
     color: #fff;
     border: none;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    letter-spacing: 0.5px;
-    margin-top: 4px;
+    transition: background 0.2s;
+    letter-spacing: 0.3px;
     display: flex; align-items: center; justify-content: center; gap: 8px;
   }
   .download-btn:hover { background: #a93226; }
-  .download-btn:active { transform: scale(0.98); }
   .download-btn:disabled { background: #ccc; cursor: not-allowed; }
 
   .reset-btn {
     width: 100%;
-    padding: 10px;
+    padding: 9px;
     background: transparent;
     color: var(--muted);
     border: 1.5px solid var(--border);
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 7px;
     transition: all 0.2s;
   }
   .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* ── PREVIEW PANEL ── */
   .preview-wrap {
     overflow-y: auto;
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 110px);
     padding: 20px;
     background: #e8eaed;
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 10px 10px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -203,65 +197,65 @@
 
   /* ── RECORD DOCUMENT ── */
   #record-doc {
-    width: 794px;  /* A4 at 96dpi */
-    min-height: 1123px;
+    width: 794px;
     background: #fff;
-    padding: 36px 40px 40px;
+    padding: 32px 38px 36px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.15);
     font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
     font-size: 13px;
     color: #111;
     line-height: 1.6;
-    transform-origin: top center;
   }
 
-  /* Record: Header */
   .rec-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 11px;
     border-bottom: 2.5px solid #111;
   }
-  .rec-logo {
-    height: 48px;
-    object-fit: contain;
-  }
+  .rec-logo { height: 46px; object-fit: contain; }
   .rec-title {
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 900;
     letter-spacing: 12px;
     color: #111;
     margin-right: -12px;
   }
+  .rec-logo-placeholder {
+    height: 46px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 900;
+    color: #111;
+  }
 
-  /* Record: Patient Info */
+  /* Patient info table */
   .rec-info-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .rec-info-table td {
     border: 1px solid #999;
-    padding: 6px 10px;
-    font-size: 13px;
+    padding: 5px 9px;
+    font-size: 12.5px;
   }
   .rec-info-table .info-label {
     background: #f0f0f0;
     font-weight: 700;
-    width: 80px;
     color: #333;
     white-space: nowrap;
+    width: 72px;
   }
-  .rec-info-table .info-value {
-    width: 160px;
-    color: #111;
-  }
+  .rec-info-table .info-value { color: #111; }
+  .rec-info-table .info-value-wide { color: #111; }
 
-  /* Record: SOAP */
+  /* SOAP sections */
   .rec-section {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     border: 1px solid #aaa;
   }
   .rec-section-header {
@@ -273,10 +267,10 @@
     border-bottom: 1px solid #aaa;
   }
   .rec-section-header .soap-letter {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 900;
     color: #c0392b;
-    min-width: 16px;
+    min-width: 14px;
   }
   .rec-section-header .soap-label {
     font-size: 12px;
@@ -284,74 +278,64 @@
     color: #444;
   }
   .rec-section-body {
-    padding: 8px 14px;
-    min-height: 40px;
+    padding: 7px 13px;
+    min-height: 36px;
     background: #fff;
-    white-space: pre-wrap;
-    font-size: 13px;
-    line-height: 1.75;
   }
 
-  /* P section subsections */
-  .rec-p-subsection { margin-bottom: 6px; }
-  .rec-p-sub-title {
-    font-weight: 700;
-    font-size: 13px;
-    color: #333;
-    margin-bottom: 2px;
-  }
-  .rec-p-items { padding-left: 4px; }
-  .rec-p-item {
-    font-size: 13px;
-    line-height: 1.7;
-    display: flex;
-    gap: 4px;
-  }
-  .rec-p-item::before { content: '·'; color: #c0392b; font-weight: 900; flex-shrink: 0; }
-
-  /* Generic bullet items (S/O/A) */
   .rec-bullet-item {
-    font-size: 13px;
-    line-height: 1.7;
+    font-size: 12.5px;
+    line-height: 1.75;
     display: flex;
-    gap: 4px;
+    gap: 5px;
   }
   .rec-bullet-item::before { content: '·'; color: #c0392b; font-weight: 900; flex-shrink: 0; }
 
-  /* Record: Footer */
+  .rec-p-subsection { margin-bottom: 5px; }
+  .rec-p-sub-title {
+    font-weight: 700;
+    font-size: 12.5px;
+    color: #333;
+    margin-bottom: 2px;
+  }
+  .rec-p-item {
+    font-size: 12.5px;
+    line-height: 1.75;
+    display: flex;
+    gap: 5px;
+  }
+  .rec-p-item::before { content: '·'; color: #c0392b; font-weight: 900; flex-shrink: 0; }
+
   .rec-footer {
-    margin-top: 20px;
-    padding-top: 12px;
+    margin-top: 16px;
+    padding-top: 10px;
     border-top: 1.5px solid #111;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .rec-footer-name {
     text-align: center;
     font-size: 13px;
     font-weight: 700;
     color: #222;
     letter-spacing: 0.5px;
   }
-
-  /* ── LOGO PLACEHOLDER ── */
-  .rec-logo-placeholder {
-    height: 48px;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 900;
-    color: #111;
-    letter-spacing: -0.5px;
+  .rec-footer-note {
+    font-size: 10.5px;
+    color: #666;
+    text-align: center;
+    line-height: 1.5;
   }
 
-  /* Responsive */
   @media (max-width: 1100px) {
     .layout { grid-template-columns: 1fr; }
-    .preview-wrap { justify-content: center; }
-    #record-doc { transform: scale(0.65); transform-origin: top center; margin-bottom: -380px; }
+    #record-doc { transform: scale(0.62); transform-origin: top center; margin-bottom: -420px; }
   }
 </style>
 </head>
 <body>
 
-<!-- APP HEADER -->
 <div class="app-header">
   <div class="logo-mark">N</div>
   <div>
@@ -362,16 +346,17 @@
 
 <div class="layout">
 
-  <!-- LEFT: INPUT PANEL -->
-  <div>
+  <!-- LEFT PANEL -->
+  <div style="display:flex;flex-direction:column;gap:14px;">
+
     <!-- SOAP Input -->
-    <div class="panel" style="margin-bottom:16px">
+    <div class="panel">
       <div class="panel-title">
         <span>📋 SOAP 텍스트 입력</span>
         <span class="badge">자동 파싱</span>
       </div>
       <div class="panel-body">
-        <div class="form-section">
+        <div class="form-section" style="margin-bottom:0">
           <div class="form-section-label">Claude 요약본 붙여넣기</div>
           <textarea class="soap-input" id="soapInput" placeholder="예시:
 환자명: 홍길동
@@ -380,7 +365,6 @@
 
 S (주관적 정보)
 · 두정부 탈모 진행으로 내원
-· M자 탈모 심화 호소
 
 O (객관적 소견)
 · Norwood stage IV 확인
@@ -390,11 +374,9 @@ A (평가)
 
 P (치료 계획)
 [약물치료]
-· 피나스테리드 1mg 처방
-[수술계획]
-· 모발이식 2,500모 계획"></textarea>
+· 피나스테리드 1mg 처방"></textarea>
           <button class="parse-btn" onclick="parseSoap()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
             자동 파싱 및 미리보기 생성
           </button>
           <div class="parse-status" id="parseStatus"></div>
@@ -403,15 +385,17 @@ P (치료 계획)
     </div>
 
     <!-- Manual Fields -->
-    <div class="panel" style="margin-bottom:16px">
+    <div class="panel">
       <div class="panel-title">
         <span>✏️ 직접 입력 항목</span>
         <span class="badge">필수</span>
       </div>
-      <div class="panel-body">
-        <div class="form-section">
+      <div class="panel-body" style="display:flex;flex-direction:column;gap:12px;">
+
+        <!-- Row 1: 자동파싱 -->
+        <div class="form-section" style="margin-bottom:0">
           <div class="form-section-label">자동 파싱 결과 (수정 가능)</div>
-          <div class="grid-3" style="margin-bottom:10px">
+          <div class="grid-3">
             <div class="field">
               <label>환자명</label>
               <input type="text" id="f_name" placeholder="홍길동" oninput="updatePreview()">
@@ -426,23 +410,36 @@ P (치료 계획)
             </div>
           </div>
         </div>
+
+        <!-- Row 2: 직접입력 -->
         <div class="form-section" style="margin-bottom:0">
           <div class="form-section-label">직접 입력 항목</div>
-          <div class="grid-3">
+          <div class="grid-3" style="margin-bottom:8px;">
             <div class="field">
               <label>생년월일</label>
-              <input type="text" id="f_birth" placeholder="1990-01-01" oninput="updatePreview()">
+              <input type="text" id="f_birth" placeholder="920617" oninput="updatePreview()">
+            </div>
+            <div class="field">
+              <label>주민등록번호</label>
+              <input type="text" id="f_jumin" placeholder="920617-1234567" oninput="updatePreview()">
             </div>
             <div class="field">
               <label>고객번호</label>
-              <input type="text" id="f_custno" placeholder="NH00001" oninput="updatePreview()">
+              <input type="text" id="f_custno" placeholder="20230509-013" oninput="updatePreview()">
             </div>
+          </div>
+          <div class="grid-2">
             <div class="field">
               <label>전화번호</label>
               <input type="text" id="f_phone" placeholder="010-0000-0000" oninput="updatePreview()">
             </div>
+            <div class="field">
+              <label>주소</label>
+              <input type="text" id="f_addr" placeholder="서울시 마포구" oninput="updatePreview()">
+            </div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -450,15 +447,16 @@ P (치료 계획)
     <div class="panel">
       <div class="panel-body">
         <button class="download-btn" id="downloadBtn" onclick="downloadPng()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           PNG 다운로드
         </button>
         <button class="reset-btn" onclick="resetAll()">초기화</button>
       </div>
     </div>
+
   </div>
 
-  <!-- RIGHT: PREVIEW PANEL -->
+  <!-- RIGHT: PREVIEW -->
   <div class="panel">
     <div class="panel-title">
       <span>👁 미리보기</span>
@@ -466,10 +464,11 @@ P (치료 계획)
     </div>
     <div class="preview-wrap">
       <div id="record-doc">
+
         <!-- HEADER -->
         <div class="rec-header">
-          <div class="rec-logo-placeholder" id="recLogoArea">
-            <span style="font-size:22px;font-weight:900;color:#111;letter-spacing:-1px">NEW<span style="color:#c0392b">HAIR</span></span>
+          <div id="recLogoArea" class="rec-logo-placeholder">
+            <span style="font-size:20px;font-weight:900;letter-spacing:-1px">NEW<span style="color:#c0392b">HAIR</span></span>
           </div>
           <div class="rec-title">진 료 기 록 부</div>
         </div>
@@ -485,73 +484,86 @@ P (치료 계획)
             <td class="info-value" id="r_custno">—</td>
           </tr>
           <tr>
-            <td class="info-label">진료일자</td>
-            <td class="info-value" id="r_date">—</td>
-            <td class="info-label">주치의</td>
-            <td class="info-value" id="r_doctor">—</td>
+            <td class="info-label">주민번호</td>
+            <td class="info-value" id="r_jumin">—</td>
             <td class="info-label">전화번호</td>
             <td class="info-value" id="r_phone">—</td>
+            <td class="info-label">진료일자</td>
+            <td class="info-value" id="r_date">—</td>
+          </tr>
+          <tr>
+            <td class="info-label">주소</td>
+            <td class="info-value-wide" id="r_addr" colspan="3">—</td>
+            <td class="info-label">주치의</td>
+            <td class="info-value" id="r_doctor">—</td>
           </tr>
         </table>
 
-        <!-- SOAP SECTIONS -->
-        <div id="r_S_section" class="rec-section">
+        <!-- SOAP -->
+        <div class="rec-section">
           <div class="rec-section-header">
             <span class="soap-letter">S</span>
             <span class="soap-label">Subjective — 주관적 정보 (환자 호소)</span>
           </div>
-          <div class="rec-section-body" id="r_S">입력 대기 중...</div>
+          <div class="rec-section-body" id="r_S"><span style="color:#bbb;font-size:12px">입력 대기 중...</span></div>
         </div>
 
-        <div id="r_O_section" class="rec-section">
+        <div class="rec-section">
           <div class="rec-section-header">
             <span class="soap-letter">O</span>
             <span class="soap-label">Objective — 객관적 소견 (검사/진찰)</span>
           </div>
-          <div class="rec-section-body" id="r_O">입력 대기 중...</div>
+          <div class="rec-section-body" id="r_O"><span style="color:#bbb;font-size:12px">입력 대기 중...</span></div>
         </div>
 
-        <div id="r_A_section" class="rec-section">
+        <div class="rec-section">
           <div class="rec-section-header">
             <span class="soap-letter">A</span>
             <span class="soap-label">Assessment — 평가 및 진단</span>
           </div>
-          <div class="rec-section-body" id="r_A">입력 대기 중...</div>
+          <div class="rec-section-body" id="r_A"><span style="color:#bbb;font-size:12px">입력 대기 중...</span></div>
         </div>
 
-        <div id="r_P_section" class="rec-section">
+        <div class="rec-section">
           <div class="rec-section-header">
             <span class="soap-letter">P</span>
             <span class="soap-label">Plan — 치료 계획</span>
           </div>
-          <div class="rec-section-body" id="r_P">입력 대기 중...</div>
+          <div class="rec-section-body" id="r_P"><span style="color:#bbb;font-size:12px">입력 대기 중...</span></div>
         </div>
 
         <!-- FOOTER -->
-        <div class="rec-footer">뉴헤어모발성형외과의원</div>
+        <div class="rec-footer">
+          <div class="rec-footer-name">뉴헤어모발성형외과의원</div>
+          <div class="rec-footer-note">※ 환자의 상세 인적사항(주소 등)은 CRM 시스템 내 마스터 회원 정보와 상시 연동되어 보관됨</div>
+        </div>
+
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- ── LOGO (hidden img for canvas) ── -->
 <img id="logoImgHidden" src="logo.png" style="display:none" crossorigin="anonymous"
-  onerror="this.style.display='none'" onload="logoLoaded=true">
+  onerror="this.style.display='none'" onload="applyLogo()">
 
 <script>
-let logoLoaded = false;
 let parsedData = { S:'', O:'', A:'', P:'' };
 
-/* ── PARSE SOAP ── */
+function applyLogo() {
+  const area = document.getElementById('recLogoArea');
+  const img = document.createElement('img');
+  img.src = 'logo.png';
+  img.className = 'rec-logo';
+  img.crossOrigin = 'anonymous';
+  area.innerHTML = '';
+  area.appendChild(img);
+}
+
 function parseSoap() {
   const raw = document.getElementById('soapInput').value.trim();
-  if (!raw) {
-    showStatus('텍스트를 입력해 주세요.', 'error');
-    return;
-  }
+  if (!raw) { showStatus('텍스트를 입력해 주세요.', 'error'); return; }
 
-  // Extract meta fields
   const nameMatch   = raw.match(/환자명\s*[:：]\s*(.+)/);
   const dateMatch   = raw.match(/진료일자\s*[:：]\s*(.+)/);
   const doctorMatch = raw.match(/주치의\s*[:：]\s*(.+)/);
@@ -560,32 +572,22 @@ function parseSoap() {
   if (dateMatch)   setAutoFilled('f_date',   dateMatch[1].trim());
   if (doctorMatch) setAutoFilled('f_doctor', doctorMatch[1].trim());
 
-  // Extract SOAP sections
-  const sections = { S:'', O:'', A:'', P:'' };
-
-  // Patterns: S / O / A / P with various header styles
-  const soapPattern = /(?:^|\n)\s*([SOAP])\s*[\(（]?[^)\n]*[\)）]?\s*\n([\s\S]*?)(?=\n\s*[SOAP]\s*[\(（]|\n\s*[SOAP]\s*[\-—\s]|$)/gi;
-  const altPattern  = /(?:^|\n)(?:S|O|A|P)\s*[\(\[（【]\s*[^)\]）】\n]*[\)\]）】]\s*\n([\s\S]*?)(?=\n\s*[SOAP]\s*[\(\[（【]|$)/gi;
-
-  // Try line-by-line approach (more robust)
   const lines = raw.split('\n');
   let currentSection = null;
   let sectionLines = { S:[], O:[], A:[], P:[] };
 
   for (let line of lines) {
-    const sHeader = line.match(/^\s*S\b[\s\(（【\[]*(주관적|Subjective)?/i);
-    const oHeader = line.match(/^\s*O\b[\s\(（【\[]*(객관적|Objective)?/i);
-    const aHeader = line.match(/^\s*A\b[\s\(（【\[]*(평가|Assessment)?/i);
-    const pHeader = line.match(/^\s*P\b[\s\(（【\[]*(치료|Plan)?/i);
+    const isBullet = /^\s*[·•\-\*]/.test(line);
+    const sH = line.match(/^\s*S\b/i) && !isBullet;
+    const oH = line.match(/^\s*O\b/i) && !isBullet;
+    const aH = line.match(/^\s*A\b/i) && !isBullet;
+    const pH = line.match(/^\s*P\b/i) && !isBullet;
 
-    if (sHeader && !line.match(/·|•|^\s*[-*]/)) { currentSection = 'S'; continue; }
-    if (oHeader && !line.match(/·|•|^\s*[-*]/)) { currentSection = 'O'; continue; }
-    if (aHeader && !line.match(/·|•|^\s*[-*]/)) { currentSection = 'A'; continue; }
-    if (pHeader && !line.match(/·|•|^\s*[-*]/)) { currentSection = 'P'; continue; }
-
-    if (currentSection) {
-      sectionLines[currentSection].push(line);
-    }
+    if (sH) { currentSection = 'S'; continue; }
+    if (oH) { currentSection = 'O'; continue; }
+    if (aH) { currentSection = 'A'; continue; }
+    if (pH) { currentSection = 'P'; continue; }
+    if (currentSection) sectionLines[currentSection].push(line);
   }
 
   parsedData.S = sectionLines.S.join('\n').trim();
@@ -593,24 +595,17 @@ function parseSoap() {
   parsedData.A = sectionLines.A.join('\n').trim();
   parsedData.P = sectionLines.P.join('\n').trim();
 
-  const foundSections = [parsedData.S, parsedData.O, parsedData.A, parsedData.P].filter(s => s).length;
-
-  if (foundSections === 0) {
-    showStatus('SOAP 섹션을 찾지 못했습니다. S/O/A/P 구분이 있는지 확인해 주세요.', 'error');
-    return;
-  }
+  const found = [parsedData.S, parsedData.O, parsedData.A, parsedData.P].filter(s=>s).length;
+  if (found === 0) { showStatus('SOAP 섹션을 찾지 못했습니다. S/O/A/P 구분이 있는지 확인해 주세요.', 'error'); return; }
 
   updatePreview();
-  showStatus(`✓ 파싱 완료 — S/O/A/P ${foundSections}개 섹션 인식됨`, 'success');
+  showStatus(`✓ 파싱 완료 — ${found}개 섹션 인식됨`, 'success');
   document.getElementById('previewBadge').textContent = '업데이트됨';
 }
 
 function setAutoFilled(id, val) {
   const el = document.getElementById(id);
-  if (!el.value) {
-    el.value = val;
-    el.classList.add('auto-filled');
-  }
+  if (!el.value) { el.value = val; el.classList.add('auto-filled'); }
 }
 
 function showStatus(msg, type) {
@@ -619,134 +614,98 @@ function showStatus(msg, type) {
   el.className = 'parse-status ' + type;
 }
 
-/* ── RENDER SOAP CONTENT ── */
-function renderSoapBody(elId, text, isP = false) {
+function renderSoap(elId, text, isP) {
   const el = document.getElementById(elId);
   if (!text.trim()) { el.innerHTML = '<span style="color:#bbb;font-size:12px">내용 없음</span>'; return; }
 
   if (!isP) {
-    // S, O, A: bullet items
     const lines = text.split('\n').filter(l => l.trim());
     el.innerHTML = lines.map(line => {
-      const content = line.replace(/^[\s·•\-\*]+/, '').trim();
-      if (!content) return '';
-      return `<div class="rec-bullet-item">${escHtml(content)}</div>`;
-    }).filter(Boolean).join('');
+      const c = line.replace(/^[\s·•\-\*]+/, '').trim();
+      return c ? `<div class="rec-bullet-item">${esc(c)}</div>` : '';
+    }).join('');
   } else {
-    // P: subsections with [소제목]
     const lines = text.split('\n');
-    let html = '';
-    let currentSub = null;
-    let currentItems = [];
-
+    let html = '', curSub = null, curItems = [];
     const flush = () => {
-      if (currentSub !== null || currentItems.length > 0) {
-        if (currentSub) html += `<div class="rec-p-subsection"><div class="rec-p-sub-title">${escHtml(currentSub)}</div>`;
-        else html += `<div class="rec-p-subsection">`;
-        html += `<div class="rec-p-items">`;
-        html += currentItems.map(i => `<div class="rec-p-item">${escHtml(i)}</div>`).join('');
-        html += `</div></div>`;
-        currentSub = null; currentItems = [];
+      if (curSub !== null || curItems.length > 0) {
+        html += `<div class="rec-p-subsection">`;
+        if (curSub) html += `<div class="rec-p-sub-title">${esc(curSub)}</div>`;
+        html += curItems.map(i => `<div class="rec-p-item">${esc(i)}</div>`).join('');
+        html += `</div>`;
+        curSub = null; curItems = [];
       }
     };
-
     for (let line of lines) {
-      const subMatch = line.match(/^\s*[\[【\(（](.+?)[\]】\)）]/);
-      if (subMatch) {
-        flush();
-        currentSub = subMatch[1].trim();
-      } else {
-        const content = line.replace(/^[\s·•\-\*]+/, '').trim();
-        if (content) currentItems.push(content);
-      }
+      const sub = line.match(/^\s*[\[【\(（](.+?)[\]】\)）]/);
+      if (sub) { flush(); curSub = sub[1].trim(); }
+      else { const c = line.replace(/^[\s·•\-\*]+/, '').trim(); if (c) curItems.push(c); }
     }
     flush();
     el.innerHTML = html || '<span style="color:#bbb;font-size:12px">내용 없음</span>';
   }
 }
 
-/* ── UPDATE PREVIEW ── */
 function updatePreview() {
-  // Info table
-  setRec('r_name',   'f_name');
-  setRec('r_birth',  'f_birth');
-  setRec('r_custno', 'f_custno');
-  setRec('r_date',   'f_date');
-  setRec('r_doctor', 'f_doctor');
-  setRec('r_phone',  'f_phone');
-
-  // SOAP
-  renderSoapBody('r_S', parsedData.S);
-  renderSoapBody('r_O', parsedData.O);
-  renderSoapBody('r_A', parsedData.A);
-  renderSoapBody('r_P', parsedData.P, true);
+  const fields = [
+    ['r_name','f_name'], ['r_birth','f_birth'], ['r_custno','f_custno'],
+    ['r_jumin','f_jumin'], ['r_phone','f_phone'], ['r_date','f_date'],
+    ['r_addr','f_addr'], ['r_doctor','f_doctor']
+  ];
+  fields.forEach(([rid, fid]) => {
+    const val = document.getElementById(fid).value.trim();
+    document.getElementById(rid).textContent = val || '—';
+  });
+  renderSoap('r_S', parsedData.S, false);
+  renderSoap('r_O', parsedData.O, false);
+  renderSoap('r_A', parsedData.A, false);
+  renderSoap('r_P', parsedData.P, true);
 }
 
-function setRec(recId, fieldId) {
-  const val = document.getElementById(fieldId).value.trim();
-  document.getElementById(recId).textContent = val || '—';
-}
-
-function escHtml(s) {
+function esc(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-/* ── DOWNLOAD PNG ── */
 async function downloadPng() {
   const btn = document.getElementById('downloadBtn');
   btn.disabled = true;
-  btn.innerHTML = `<span>생성 중...</span>`;
-
+  btn.innerHTML = '<span>생성 중...</span>';
   try {
     const doc = document.getElementById('record-doc');
-    const originalTransform = doc.style.transform;
+    const orig = doc.style.transform;
     doc.style.transform = 'none';
-
     const canvas = await html2canvas(doc, {
-      scale: 2.5,
-      useCORS: true,
-      allowTaint: false,
-      backgroundColor: '#ffffff',
-      logging: false,
-      width: doc.scrollWidth,
-      height: doc.scrollHeight,
+      scale: 2.5, useCORS: true, allowTaint: false,
+      backgroundColor: '#ffffff', logging: false,
+      width: doc.scrollWidth, height: doc.scrollHeight,
     });
-
-    doc.style.transform = originalTransform;
-
-    // Filename: 환자명_진료기록부_YYMMDD.png
+    doc.style.transform = orig;
     const name    = document.getElementById('f_name').value.trim() || '환자';
     const dateVal = document.getElementById('f_date').value.trim() || '';
-    const dateStr = dateVal.replace(/[-./]/g, '').slice(2, 8) || formatToday();
+    const dateStr = dateVal.replace(/[-./]/g,'').slice(2,8) || formatToday();
     const filename = `${name}_진료기록부_${dateStr}.png`;
-
     const link = document.createElement('a');
     link.download = filename;
     link.href = canvas.toDataURL('image/png');
     link.click();
-
     showStatus(`✓ 다운로드 완료: ${filename}`, 'success');
   } catch(e) {
     showStatus('PNG 생성 오류: ' + e.message, 'error');
-    console.error(e);
   } finally {
     btn.disabled = false;
-    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> PNG 다운로드`;
+    btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> PNG 다운로드`;
   }
 }
 
 function formatToday() {
   const d = new Date();
-  return String(d.getFullYear()).slice(2)
-       + String(d.getMonth()+1).padStart(2,'0')
-       + String(d.getDate()).padStart(2,'0');
+  return String(d.getFullYear()).slice(2) + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0');
 }
 
-/* ── RESET ── */
 function resetAll() {
   if (!confirm('모두 초기화하시겠습니까?')) return;
   document.getElementById('soapInput').value = '';
-  ['f_name','f_birth','f_custno','f_date','f_doctor','f_phone'].forEach(id => {
+  ['f_name','f_birth','f_custno','f_jumin','f_phone','f_date','f_addr','f_doctor'].forEach(id => {
     const el = document.getElementById(id);
     el.value = '';
     el.classList.remove('auto-filled');
@@ -757,20 +716,6 @@ function resetAll() {
   document.getElementById('previewBadge').textContent = '대기 중';
 }
 
-/* ── LOGO HANDLING ── */
-// Try to load logo.png; if it loads, replace text placeholder
-document.getElementById('logoImgHidden').addEventListener('load', function() {
-  const area = document.getElementById('recLogoArea');
-  const img = document.createElement('img');
-  img.src = 'logo.png';
-  img.className = 'rec-logo';
-  img.crossOrigin = 'anonymous';
-  area.innerHTML = '';
-  area.appendChild(img);
-  logoLoaded = true;
-});
-
-// Initial render
 updatePreview();
 </script>
 </body>
