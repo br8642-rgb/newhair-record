@@ -425,8 +425,8 @@ P (치료 계획)
               <div style="display:flex;align-items:center;gap:6px;margin-top:4px;">
                 <span style="font-size:10px;color:var(--muted);font-weight:600;">출력</span>
                 <div class="mask-toggle">
-                  <button id="btnFull" class="active" onclick="setMask(false)">전체</button>
-                  <button id="btnMask" onclick="setMask(true)">마스킹</button>
+                  <button id="btnFull" onclick="setMask(false)">전체</button>
+                  <button id="btnMask" class="active" onclick="setMask(true)">마스킹</button>
                 </div>
               </div>
             </div>
@@ -542,7 +542,7 @@ P (치료 계획)
 
 <script>
 let parsedData = { S:'', O:'', A:'', P:'' };
-let maskJumin = false;
+let maskJumin = true;
 
 function applyLogo() {
   const area = document.getElementById('recLogoArea');
@@ -725,9 +725,9 @@ function resetAll() {
     el.classList.remove('auto-filled');
   });
   parsedData = { S:'', O:'', A:'', P:'' };
-  maskJumin = false;
-  document.getElementById('btnFull').classList.add('active');
-  document.getElementById('btnMask').classList.remove('active');
+  maskJumin = true;
+  document.getElementById('btnFull').classList.remove('active');
+  document.getElementById('btnMask').classList.add('active');
   updatePreview();
   document.getElementById('parseStatus').className = 'parse-status';
   document.getElementById('previewBadge').textContent = '대기 중';
