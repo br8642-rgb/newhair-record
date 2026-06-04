@@ -136,6 +136,43 @@
   }
   .field input:focus { outline: none; border-color: var(--accent); }
   .field input.auto-filled { background: #fff9f9; border-color: #f5a0a0; }
+
+  /* 마스킹 토글 */
+  .jumin-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  .jumin-row .field { flex: 1; }
+  .mask-toggle {
+    display: flex;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    overflow: hidden;
+    height: 34px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .mask-toggle button {
+    padding: 0 10px;
+    border: none;
+    background: #f5f5f5;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: inherit;
+  }
+  .mask-toggle button.active {
+    background: var(--primary);
+    color: #fff;
+  }
+  .mask-toggle button:first-child {
+    border-right: 1.5px solid var(--border);
+  }
+
   .download-btn {
     width: 100%;
     padding: 12px;
@@ -175,8 +212,6 @@
     align-items: flex-start;
     justify-content: center;
   }
-
-  /* ── RECORD DOC ── */
   #record-doc {
     width: 794px;
     background: #fff;
@@ -384,9 +419,18 @@ P (치료 계획)
               <label>고객번호</label>
               <input type="text" id="f_custno" placeholder="20230509-013" oninput="updatePreview()">
             </div>
-            <div class="field">
-              <label>주민등록번호</label>
-              <input type="text" id="f_jumin" placeholder="751128-2069639" oninput="updatePreview()">
+            <div class="jumin-row">
+              <div class="field">
+                <label>주민등록번호</label>
+                <input type="text" id="f_jumin" placeholder="751128-2069639" oninput="updatePreview()">
+              </div>
+              <div style="padding-bottom:3px;">
+                <div style="font-size:10px;color:var(--muted);margin-bottom:3px;font-weight:600;">출력</div>
+                <div class="mask-toggle">
+                  <button id="btnFull" class="active" onclick="setMask(false)">전체</button>
+                  <button id="btnMask" onclick="setMask(true)">마스킹</button>
+                </div>
+              </div>
             </div>
             <div class="field">
               <label>전화번호</label>
@@ -432,9 +476,9 @@ P (치료 계획)
         <table class="rec-info-table">
           <tr>
             <td class="info-label">환자명</td>
-            <td class="info-value" id="r_name" style="width:220px;">—</td>
+            <td class="info-value" id="r_name" style="width:200px;">—</td>
             <td class="info-label">진료일자</td>
-            <td class="info-value" id="r_date" style="width:120px;">—</td>
+            <td class="info-value" id="r_date" style="width:110px;">—</td>
             <td class="info-label">주치의</td>
             <td class="info-value" id="r_doctor">—</td>
           </tr>
@@ -500,6 +544,7 @@ P (치료 계획)
 
 <script>
 let parsedData = { S:'', O:'', A:'', P:'' };
+let maskJumin = false;
 
 function applyLogo() {
   const area = document.getElementById('recLogoArea');
@@ -509,6 +554,27 @@ function applyLogo() {
   img.crossOrigin = 'anonymous';
   area.innerHTML = '';
   area.appendChild(img);
+}
+
+function setMask(val) {
+  maskJumin = val;
+  document.getElementById('btnFull').classList.toggle('active', !val);
+  document.getElementById('btnMask').classList.toggle('active', val);
+  updatePreview();
+}
+
+function getJuminDisplay() {
+  const raw = document.getElementById('f_jumin').value.trim();
+  if (!raw) return '—';
+  if (!maskJumin) return raw;
+  const parts = raw.split('-');
+  if (parts.length === 2) {
+    return parts[0] + '-' + parts[1].charAt(0) + '******';
+  }
+  if (raw.length >= 7) {
+    return raw.slice(0, 7) + '******';
+  }
+  return raw;
 }
 
 function parseSoap() {
@@ -597,15 +663,15 @@ function renderSoap(elId, text, isP) {
 }
 
 function updatePreview() {
-  const fields = [
+  const simple = [
     ['r_name','f_name'], ['r_date','f_date'], ['r_doctor','f_doctor'],
-    ['r_custno','f_custno'], ['r_jumin','f_jumin'], ['r_phone','f_phone'],
-    ['r_addr','f_addr']
+    ['r_custno','f_custno'], ['r_phone','f_phone'], ['r_addr','f_addr']
   ];
-  fields.forEach(([rid, fid]) => {
+  simple.forEach(([rid, fid]) => {
     const val = document.getElementById(fid).value.trim();
     document.getElementById(rid).textContent = val || '—';
   });
+  document.getElementById('r_jumin').textContent = getJuminDisplay();
   renderSoap('r_S', parsedData.S, false);
   renderSoap('r_O', parsedData.O, false);
   renderSoap('r_A', parsedData.A, false);
@@ -661,6 +727,9 @@ function resetAll() {
     el.classList.remove('auto-filled');
   });
   parsedData = { S:'', O:'', A:'', P:'' };
+  maskJumin = false;
+  document.getElementById('btnFull').classList.add('active');
+  document.getElementById('btnMask').classList.remove('active');
   updatePreview();
   document.getElementById('parseStatus').className = 'parse-status';
   document.getElementById('previewBadge').textContent = '대기 중';
